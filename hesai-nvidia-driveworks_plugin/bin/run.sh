@@ -30,7 +30,7 @@ PLUGIN_PATH="${PLUGIN_DIR}/${PLUGIN_FILE}"
 #  CUSTOM_EX can be displayed in replay sample
 SENSOR_TYPE="CUSTOM_EX"
 
-# Support hesai lidar AT128 - "AT128E2X", QT128 - "QT128C2X", P128 - "Pandar128E3X"
+# Support hesai lidar AT128 - "AT128E2X", QT128 - "QT128C2X", P128 - "Pandar128E3X", P64 - "Pandar64"
 LIDAR_TYPE="AT128E2X"
 
 # Set path of your correction file, loading local correction file would start if no file from lidar was found
@@ -43,6 +43,9 @@ then
 elif [ "${LIDAR_TYPE}" = "Pandar128E3X" ]
 then
     CORRECTION_FILE="../share/correction_p128.dat"
+elif [ "${LIDAR_TYPE}" = "Pandar64" ]
+then
+    CORRECTION_FILE="../share/correction_p64.dat"
 else
     echo "Wrong Lidar Type: ${LIDAR_TYPE}"
     CORRECTION_FILE=""

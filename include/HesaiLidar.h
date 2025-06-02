@@ -40,6 +40,7 @@ namespace lidar
 const std::string LIDAR_TYPE_AT128 = "AT128E2X";
 const std::string LIDAR_TYPE_QT128 = "QT128C2X";
 const std::string LIDAR_TYPE_P128 = "Pandar128E3X";
+const std::string LIDAR_TYPE_P64 = "Pandar64";
 
 const size_t SAMPLE_BUFFER_POOL_SIZE = 5;
 

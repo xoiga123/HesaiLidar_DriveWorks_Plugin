@@ -28,6 +28,7 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/TcpCommandClient.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/util.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/PlatUtils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/UdpParser/src/Udp64_Parser.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/UdpParser/src/Udp1_4_Parser.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/UdpParser/src/Udp4_3_Parser.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/UdpParser/src/Udp3_2_Parser.cpp

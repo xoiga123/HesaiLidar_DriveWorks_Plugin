@@ -22,6 +22,7 @@
 #include "Udp4_3_Parser.h"
 #include "Udp3_2_Parser.h"
 #include "Udp1_4_Parser.h"
+#include "Udp64_Parser.h"
 
 namespace dw
 {
@@ -45,6 +46,8 @@ dwStatus HesaiLidar::createParser(std::string lidartype) {
         m_Parser = new Udp3_2_Parser();
     } else if (lidartype == LIDAR_TYPE_P128) {
         m_Parser = new Udp1_4_Parser();
+    } else if (lidartype == LIDAR_TYPE_P64) {
+        m_Parser = new Udp64_Parser();
     } else {
         std::cout << "createParser, create specific parser Error, lidartype=" << lidartype << std::endl;
         return DW_CANNOT_CREATE_OBJECT;

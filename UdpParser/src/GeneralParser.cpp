@@ -163,12 +163,6 @@ int64_t GeneralParser::GetMicroLidarTimeU64(const uint8_t* utc, int size, uint32
   if (utc[0] != 0) {
     struct tm t = {0};
     t.tm_year = utc[0];
-    if (t.tm_year >= 200) {
-      t.tm_year -= 100;
-    }
-    else if (t.tm_year <= 100){
-      t.tm_year += 100;
-    }
     t.tm_mon = utc[1] - 1;
     t.tm_mday = utc[2];
     t.tm_hour = utc[3];

@@ -193,13 +193,13 @@ dwStatus GeneralParser::ComputeDwPoint(dwLidarPointXYZI& pointXYZI, dwLidarPoint
   pointXYZI.x = xyDistance * this->m_fSinAllAngle[azimuth];
   pointXYZI.y = xyDistance * this->m_fCosAllAngle[azimuth];
   pointXYZI.z = radius * this->m_fSinAllAngle[elevation];
-  pointXYZI.intensity = intensity;  // float type 0-1 /255.0f
+  pointXYZI.intensity = intensity / 255.0f;  // float type 0-1 /255.0f
 
   pointRTHI.radius = radius;
   // 100 is the unit!!
   pointRTHI.theta = azimuth / m_iAziCorrUnit / 180 * M_PI;
   pointRTHI.phi = elevation / m_iAziCorrUnit / 180 * M_PI;
-  pointRTHI.intensity = intensity;
+  pointRTHI.intensity = intensity / 255.0f;
 
   return DW_SUCCESS;
 }

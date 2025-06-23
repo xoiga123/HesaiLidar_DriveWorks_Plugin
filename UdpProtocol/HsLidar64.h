@@ -91,24 +91,24 @@ struct HS_LIDAR_TAIL_64 {
 
   int64_t GetMicroLidarTimeU64() const {
     if (m_u8UTC[0] != 0) {
-			struct tm t = {0};
-			t.tm_year = m_u8UTC[0] + 100;
-			t.tm_mon = m_u8UTC[1] - 1;
-			t.tm_mday = m_u8UTC[2];
-			t.tm_hour = m_u8UTC[3];
-			t.tm_min = m_u8UTC[4];
-			t.tm_sec = m_u8UTC[5];
-			t.tm_isdst = 0;
-			return (mktime(&t)) * 1000000 + GetTimestamp();
-		}
-		else {
+      struct tm t = {0};
+      t.tm_year = m_u8UTC[0] + 100;
+      t.tm_mon = m_u8UTC[1] - 1;
+      t.tm_mday = m_u8UTC[2];
+      t.tm_hour = m_u8UTC[3];
+      t.tm_min = m_u8UTC[4];
+      t.tm_sec = m_u8UTC[5];
+      t.tm_isdst = 0;
+      return (mktime(&t)) * 1000000 + GetTimestamp();
+    }
+    else {
       uint32_t utc_time_big = *(uint32_t*)(&m_u8UTC[0] + 2);
       int64_t unix_second = ((utc_time_big >> 24) & 0xff) |
               ((utc_time_big >> 8) & 0xff00) |
               ((utc_time_big << 8) & 0xff0000) |
               ((utc_time_big << 24));
       return unix_second * 1000000 + GetTimestamp();
-		}
+    }
   }
 
   uint8_t GetFactoryInfo() const { return m_u8FactoryInfo; }

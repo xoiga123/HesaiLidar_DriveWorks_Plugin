@@ -93,9 +93,6 @@ struct HS_LIDAR_TAIL_64 {
     if (m_u8UTC[0] != 0) {
 			struct tm t = {0};
 			t.tm_year = m_u8UTC[0] + 100;
-			if (t.tm_year >= 200) {
-				t.tm_year -= 100;
-			}
 			t.tm_mon = m_u8UTC[1] - 1;
 			t.tm_mday = m_u8UTC[2];
 			t.tm_hour = m_u8UTC[3];

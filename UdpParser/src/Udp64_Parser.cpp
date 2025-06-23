@@ -99,8 +99,7 @@ dwStatus Udp64_Parser::ParserOnePacket(dwLidarDecodedPacket *output, const uint8
   output->nPoints = m_nBlockNum * m_nLaserNum;
   // scanComplete must be filled or it cracks
   output->scanComplete = false;
-  // output->sensorTimestamp = GetMicroLidarTimeU64(pTail->m_u8UTC, 6, pTail->GetTimestamp());
-  output->sensorTimestamp = this->GetMicroLidarTimeU64(pTail->m_u8UTC, 6, pTail->GetTimestamp());
+  output->sensorTimestamp = pTail->GetMicroLidarTimeU64();
 
   int index = 0;
   float minAzimuth = -361;
@@ -160,31 +159,4 @@ unsigned long Udp64_Parser::GetDataBodySize(const HS_LIDAR_HEADER_64 *pHeader) {
   unsigned long bodySize = (sizeof(HS_LIDAR_BODY_AZIMUTH_64) + sizeof(HS_LIDAR_BODY_CHN_UNIT_64) *
                             pHeader->GetLaserNum()) * pHeader->GetBlockNum();
   return bodySize;
-}
-
-int64_t Udp64_Parser::GetMicroLidarTimeU64(const uint8_t* utc, int size, uint32_t timestamp) const {
-  if (size != 6) {
-    printf("GetMicroLidarTimeU64: array utc size is not 6 Error\n");
-    return -1;
-  }
-
-  if (utc[0] != 0) {
-    struct tm t = {0};
-    t.tm_year = utc[0] + 100;
-    t.tm_mon = utc[1] - 1;
-    t.tm_mday = utc[2];
-    t.tm_hour = utc[3];
-    t.tm_min = utc[4];
-    t.tm_sec = utc[5];
-    t.tm_isdst = 0;
-    return (mktime(&t)) * 1000000 + timestamp;
-  }
-  else {
-    uint32_t utc_time_big = *(uint32_t*)(&utc[0] + 2);
-    int unix_second = ((utc_time_big >> 24) & 0xff) |
-            ((utc_time_big >> 8) & 0xff00) |
-            ((utc_time_big << 8) & 0xff0000) |
-            ((utc_time_big << 24));
-    return unix_second * 1000000 + timestamp;
-  }
 }

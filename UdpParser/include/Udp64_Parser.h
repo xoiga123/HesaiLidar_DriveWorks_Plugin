@@ -55,6 +55,7 @@ class Udp64_Parser : public GeneralParser {
   const int m_nAziUnitUDP = HS_LIDAR_P64_AZIMUTH_UNIT_UDP;
 
   unsigned long GetDataBodySize(const HS_LIDAR_HEADER_64 *pHeader);
+  int64_t GetMicroLidarTimeU64(const uint8_t* utc, int size, uint32_t timestamp) const;
 };
 
 #endif  // UDP64_PARSER_H_
